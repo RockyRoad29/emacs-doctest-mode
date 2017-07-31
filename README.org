@@ -1,0 +1,74 @@
+* Overview
+
+=doctest-mode= is an Emacs major mode for editing text files that contain Python
+doctest examples. Doctest is a testing framework for Python that emulates an
+interactive session, and checks the result of each command. For more
+information, see the [[https://docs.python.org/2.7/library/doctest.html][Python library reference documentation on doctest]].
+doctest-mode makes it easier to write and maintain doctest files, by providing:
+
+  - Syntax highlighting of the prompts, source code, and expected output for each doctest example.
+  - Editing support, including automatic indentation (similar to python-mode) and automatic prompt management.
+  - Execution support, allowing you to run doctest directly from emacs, and examine the results in an output buffer.
+  - Failure navigation, allowing you to quickly navigate between failed examples after you run doctest.
+  - Output replacement, allowing you to easily update doctest examples with the correct output value.
+
+It was written by *Edward Loper* in August 2004,
+the official page is : http://ed.loper.org/projects/doctestmode/
+with a well done documentation.
+
+It is still part of python-mode project, successively hosted at
+  + Sourceforge: https://sourceforge.net/projects/python-mode/
+  + Launchpad : http://launchpad.net/python-mode
+  + GitLab : https://gitlab.com/python-mode-devs/python-mode
+
+But as of today (July 31, 2017), at the same versions from 2004.
+
+    - doctest-mode 0.4 (official release)
+    - doctest-mode 0.5 (alpha release -- adds mmm-mode suppor bbt)
+
+If you're interested in full project history you may use the links above,
+I started this version tracking from the last versions.
+The /0.5 alpha release/ is in the branch named *mmm_support* .
+
+* News
+
+** Compiling in emacs 25.2
+ I'm not using /mmm-mode/ so I started working from the r0.4 version.
+ It was working well enough in my /emacs 25.2.1/ ([[http://spacemacs.org/][spacemacs]]) but the
+ great *Output replacement* feature was sadly failing at
+ (just following the [[http://ed.loper.org/projects/doctestmode/walkthrough1.html][online demo]] ) at line 1366:
+
+       : (replace-match doctest-got t t)
+
+ The byte compilation was triggering many warnings, so I simply started
+doing the proposed source code modifications:
+
+
+  - assignment to free variables:
+    - doctest-selected-failure
+    - doctest-async-process
+    - doctest-results-buffer
+    - doctest-source-buffer
+    - doctest-async-process-tempfile
+    - doctest-async-process
+    - doctest-example-markers
+    - doctest-selected-failure
+  - ‘delete-backward-char’ is for interactive use only; use ‘delete-char’ instead.
+  - ‘insert-string’ is an obsolete function (as of 22.1); use ‘insert’ instead.
+  - doctest-looking-back called with 1 argument, but requires 2-3
+  - Use ‘with-current-buffer’ rather than save-excursion+set-buffer
+  - ‘toggle-read-only’ is an obsolete function (as of 24.3); use ‘read-only-mode’ instead.
+  - ‘string-to-int’ is an obsolete function (as of 22.1); use ‘string-to-number’ instead.
+
+
+Those changes should not break compatibility with earlier versions, even
+pre-22.1, but I did not check.
+
+However, this solved the issue on `doctest-replace-output` .
+
+* Credits
+
+*Doctest-mode* was first written by *Edward Loper* in August 2004
+and 2007, the official page is :
+
+    http://ed.loper.org/projects/doctestmode/

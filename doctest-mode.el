@@ -4,6 +4,7 @@
 
 ;; Author:     Edward Loper
 ;; Maintainer: edloper@alum.mit.edu
+;; Maintainer: rocky.road@rocky-shore.net (2017)
 ;; Created:    Aug 2004
 ;; Keywords:   python doctest unittest test docstring
 
