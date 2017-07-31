@@ -21,10 +21,10 @@ It is still part of python-mode project, successively hosted at
   + Launchpad : http://launchpad.net/python-mode
   + GitLab : https://gitlab.com/python-mode-devs/python-mode
 
-But as of today (July 31, 2017), at the same versions from 2004.
+But as of today (July 31, 2017), at the same versions:
 
-    - doctest-mode 0.4 (official release)
-    - doctest-mode 0.5 (alpha release -- adds mmm-mode suppor bbt)
+    - 2004: doctest-mode 0.4 (official release)
+    - 2007: doctest-mode 0.5 (alpha release -- adds mmm-mode suppor bbt)
 
 If you're interested in full project history you may use the links above,
 I started this version tracking from the last versions.
